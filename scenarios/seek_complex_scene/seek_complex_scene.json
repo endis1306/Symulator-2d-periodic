@@ -1,0 +1,320 @@
+{
+  "delta_t": 0.01,
+  "iterations": 3500,
+  "boundary_point": [
+    100.0,
+    80.0
+  ],
+  "log_file": "logs/seek_complex_scene.log.jsonl",
+  "objects": [
+    {
+      "id": "moving_target",
+      "shape": {
+        "type": "circle",
+        "r": 3.0
+      },
+      "positionXY": [
+        80.0,
+        55.0
+      ],
+      "velocityXY": [
+        -0.7,
+        0.25
+      ],
+      "theta": 0.0,
+      "omega": 0.0,
+      "static": false,
+      "bodyParams": {
+        "drag_lin_forward": 0.02,
+        "drag_lin_side": 0.08,
+        "drag_rot": 0.02,
+        "I": 1.3,
+        "mass": 6.0
+      },
+      "engines": [],
+      "sensors": [],
+      "logic": {
+        "type": "static",
+        "params": {}
+      }
+    },
+    {
+      "id": "seeker_A",
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            6.0,
+            0.0
+          ],
+          [
+            2.0,
+            1.2
+          ],
+          [
+            1.0,
+            1.2
+          ],
+          [
+            1.0,
+            4.0
+          ],
+          [
+            2.0,
+            5.0
+          ],
+          [
+            0.0,
+            6.0
+          ],
+          [
+            -2.0,
+            5.0
+          ],
+          [
+            -1.0,
+            4.0
+          ],
+          [
+            -1.0,
+            1.2
+          ],
+          [
+            -4.0,
+            1.2
+          ],
+          [
+            -6.0,
+            0.0
+          ],
+          [
+            -4.0,
+            -1.2
+          ],
+          [
+            -1.0,
+            -1.2
+          ],
+          [
+            -1.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            -5.0
+          ],
+          [
+            0.0,
+            -6.0
+          ],
+          [
+            2.0,
+            -5.0
+          ],
+          [
+            1.0,
+            -4.0
+          ],
+          [
+            1.0,
+            -1.2
+          ],
+          [
+            2.0,
+            -1.2
+          ]
+        ]
+      },
+      "positionXY": [
+        20.0,
+        30.0
+      ],
+      "velocityXY": [
+        0.0,
+        0.0
+      ],
+      "theta": 0.6,
+      "omega": 0.0,
+      "static": false,
+      "bodyParams": {
+        "drag_lin_forward": 0.032,
+        "drag_lin_side": 0.35,
+        "drag_rot": 0.1,
+        "I": 0.35,
+        "mass": 3.0
+      },
+      "engines": [
+        {
+          "id": "A_engine_left",
+          "rotor_omega_max": 80.0,
+          "tau_motor": 0.01,
+          "k_thrust": 3.1e-05,
+          "angle_offset": 0.0,
+          "position_local": [
+            0.0,
+            5.2
+          ]
+        },
+        {
+          "id": "A_engine_right",
+          "rotor_omega_max": 80.0,
+          "tau_motor": 0.01,
+          "k_thrust": 3.1e-05,
+          "angle_offset": 0.0,
+          "position_local": [
+            0.0,
+            -5.2
+          ]
+        }
+      ],
+      "sensors": [],
+      "logic": {
+        "type": "custom",
+        "params": {
+          "logic_module": "sim.systems.logic.my_module",
+          "logic_function": "seek_control",
+          "target_id": "moving_target"
+        }
+      }
+    },
+    {
+      "id": "seeker_B",
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            6.0,
+            0.0
+          ],
+          [
+            2.0,
+            1.2
+          ],
+          [
+            1.0,
+            1.2
+          ],
+          [
+            1.0,
+            4.0
+          ],
+          [
+            2.0,
+            5.0
+          ],
+          [
+            0.0,
+            6.0
+          ],
+          [
+            -2.0,
+            5.0
+          ],
+          [
+            -1.0,
+            4.0
+          ],
+          [
+            -1.0,
+            1.2
+          ],
+          [
+            -4.0,
+            1.2
+          ],
+          [
+            -6.0,
+            0.0
+          ],
+          [
+            -4.0,
+            -1.2
+          ],
+          [
+            -1.0,
+            -1.2
+          ],
+          [
+            -1.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            -5.0
+          ],
+          [
+            0.0,
+            -6.0
+          ],
+          [
+            2.0,
+            -5.0
+          ],
+          [
+            1.0,
+            -4.0
+          ],
+          [
+            1.0,
+            -1.2
+          ],
+          [
+            2.0,
+            -1.2
+          ]
+        ]
+      },
+      "positionXY": [
+        10.0,
+        55.0
+      ],
+      "velocityXY": [
+        0.0,
+        0.0
+      ],
+      "theta": -1.8,
+      "omega": 0.0,
+      "static": false,
+      "bodyParams": {
+        "drag_lin_forward": 0.013,
+        "drag_lin_side": 0.17,
+        "drag_rot": 0.15,
+        "I": 0.28,
+        "mass": 1.0
+      },
+      "engines": [
+        {
+          "id": "B_engine_left",
+          "rotor_omega_max": 270.0,
+          "tau_motor": 0.01,
+          "k_thrust": 3.1e-05,
+          "angle_offset": 0.0,
+          "position_local": [
+            0.0,
+            5.2
+          ]
+        },
+        {
+          "id": "B_engine_right",
+          "rotor_omega_max": 270.0,
+          "tau_motor": 0.01,
+          "k_thrust": 3.1e-05,
+          "angle_offset": 0.0,
+          "position_local": [
+            0.0,
+            -5.2
+          ]
+        }
+      ],
+      "sensors": [],
+      "logic": {
+        "type": "custom",
+        "params": {
+          "logic_module": "sim.systems.logic.my_module",
+          "logic_function": "seek_control",
+          "target_id": "seeker_A"
+        }
+      }
+    }
+  ]
+}
