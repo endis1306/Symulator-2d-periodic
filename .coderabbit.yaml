@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "pl-PL"
+tone_instructions: "Pisz rzeczowo i zwięźle. Wskazuj konkretne błędy i ryzyka, nie komentuj drobnego stylu."
+
+reviews:
+  profile: "chill"            # mniej szumu; zmień na "assertive" dla ostrzejszych uwag
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: true
+
+  auto_review:
+    enabled: true
+    drafts: false             # szkice (Draft PR) nie są sprawdzane
+    base_branches:
+      - "develop"
+      - "main"
+
+  path_filters:
+    - "!**/*.jsonl"           # logi symulacji (duże, generowane)
+    - "!**/*.log"
+    - "!scenarios/**/*.json"  # konfiguracje generowane z .simdsl
+    - "!**/__pycache__/**"
+    - "!logs/**"
+
+  path_instructions:
+    - path: "sim/**/*.py"
+      instructions: |
+        Symulator fizyczny 2D. Zwracaj uwagę na poprawność fizyki i numeryki
+        (jednostki, znaki, normalizację kątów, dzielenie przez zero),
+        determinizm przebiegu oraz wydajność w pętli symulacji.
+    - path: "sim/utils/collision_helpers.py"
+      instructions: "Sprawdzaj przypadki brzegowe geometrii (zerowa długość, styczność, wielokąty wklęsłe)."
+    - path: "tests/**"
+      instructions: "Sprawdzaj, czy testy są deterministyczne i naprawdę weryfikują zachowanie, a nie tylko brak wyjątku."
+    - path: "DSL/**/*.py"
+      instructions: "Sprawdzaj walidację konfiguracji i czytelność komunikatów błędów."
+
+  tools:
+    ruff:
+      enabled: true
+    gitleaks:
+      enabled: true           # wykrywa przypadkowo wgrane hasła i tokeny
+    markdownlint:
+      enabled: true
+    yamllint:
+      enabled: true
+
+chat:
+  auto_reply: true
